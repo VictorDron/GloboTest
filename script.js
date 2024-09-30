@@ -44,9 +44,16 @@ class Dot {
     }
 
     draw() {
+        // Calcula a distância radial normalizada (0 no centro, 1 na periferia)
+        const radialDistance = Math.sqrt(this.x3D * this.x3D + this.y3D * this.y3D);
+        const normalizedRadialDistance = radialDistance / GLOBE_RADIUS;
+
+        // Mapeia a distância radial para uma cor no espectro eletromagnético
+        const hue = normalizedRadialDistance * 270; // De vermelho (0°) a violeta (270°)
+        ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+
         ctx.beginPath();
         ctx.arc(this.x2D, this.y2D, DOT_RADIUS, 0, Math.PI * 2);
-        ctx.fillStyle = '#000'; // Pontos pretos
         ctx.fill();
     }
 
